@@ -1,3 +1,5 @@
 platform-automation-bucket: navneetv-platform-auto
 credhub-server: https://your-credhub.example.com
 opsman-url: https://pcf.gcpcloud.navneetv.com
+pivnet-refresh-token: TT9GCbfZKc4GNY1jotWL
+pipeline-repo: git@github.com:papivot/platform-automation-pipelines
