@@ -1,0 +1,11 @@
+---
+opsman-configuration:
+  gcp:
+    gcp_service_account: ((gcp_service_account_json))
+    project: pa-nverma
+    region: us-east1
+    zone: us-east1-b
+    vm_name: ops-manager-foundation
+    vpc_subnet: gcpcloud-infrastructure-subnet
+    tags: ops-manager
+    private_ip: 10.0.0.2

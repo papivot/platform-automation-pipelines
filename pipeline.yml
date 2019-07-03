@@ -11,6 +11,12 @@ resources:
   source:
     product_slug: platform-automation
     api_token: ((pivnet-refresh-token))
+- name: config
+  type: git
+  source:
+    uri: ((pipeline-repo))
+    #private_key: ((plat-auto-pipes-deploy-key.private_key))
+    branch: master
 
 jobs:
 - name: install-ops-manager
@@ -32,3 +38,9 @@ jobs:
       file: platform-automation-tasks/tasks/download-product.yml
       params:
         CONFIG_FILE: gcp/download-ops-manager.yml
+    - task: create-vm
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/create-vm.yml
+      params:
+        OPSMAN_CONFIG_FILE: gcp/opsman.yml
+        STATE_FILE: gcp/state.yml
