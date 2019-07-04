@@ -5,12 +5,14 @@ resource_types:
   source:
     repository: pivotalcf/pivnet-resource
     tag: latest-final
+
 resources:
 - name: platform-automation
   type: pivnet
   source:
     product_slug: platform-automation
     api_token: ((pivnet-refresh-token))
+
 - name: config
   type: git
   source:
@@ -32,12 +34,25 @@ jobs:
       params:
         globs: ["*tasks*.zip"]
         unpack: true
+
     - get: config
+    - task: var-interpolate
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/test-interpolate.yml
+      params:
+        SKIP_MISSING: true
+        VARS_FILES:
+        CONFIG_FILE:
+      inputs:
+        - name: config
+        - name: vars
+
     - task: download-product
       image: platform-automation-image
       file: platform-automation-tasks/tasks/download-product.yml
       params:
         CONFIG_FILE: gcp/download-ops-manager.yml
+    
     - task: create-vm
       image: platform-automation-image
       file: platform-automation-tasks/tasks/create-vm.yml
