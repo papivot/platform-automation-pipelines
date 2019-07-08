@@ -1,4 +1,7 @@
 ---
+config_params: &config-params
+  pivnet-refresh-token: ((pivnet-refresh-token))
+
 resource_types:
 - name: pivnet
   type: docker-image
@@ -42,6 +45,7 @@ jobs:
     - task: download-product
       image: platform-automation-image
       file: platform-automation-tasks/tasks/download-product.yml
+      params: *config-params
       params:
         CONFIG_FILE: config/gcp/download-ops-manager.yml
     
