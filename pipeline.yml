@@ -17,9 +17,11 @@ resources:
   type: git
   source:
     uri: ((pipeline-repo))
-    #private_key: ((plat-auto-pipes-deploy-key.private_key))
     branch: master
-
+#    private_key: ((git_key))
+    username: ((git_username))
+    password: ((git_password))
+    
 jobs:
 - name: install-ops-manager
   serial: true
@@ -36,16 +38,6 @@ jobs:
         unpack: true
 
     - get: config
-    - task: var-interpolate
-      image: platform-automation-image
-      file: platform-automation-tasks/tasks/test-interpolate.yml
-      params:
-        SKIP_MISSING: true
-        VARS_FILES:
-        CONFIG_FILE:
-      inputs:
-        - name: config
-        - name: vars
 
     - task: download-product
       image: platform-automation-image
