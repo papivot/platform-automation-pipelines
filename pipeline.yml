@@ -43,7 +43,7 @@ jobs:
       image: platform-automation-image
       file: platform-automation-tasks/tasks/download-product.yml
       params:
-        CONFIG_FILE: gcp/download-ops-manager.yml
+        CONFIG_FILE: config/gcp/download-ops-manager.yml
     
     - task: create-vm
       image: platform-automation-image
